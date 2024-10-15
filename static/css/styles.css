@@ -1,0 +1,403 @@
+/* Fuentes */
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(../font/Roboto-Bold.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(../font/Roboto-Regular.ttf);
+}
+
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto-Regular", sans-serif;
+}
+
+main {
+  padding: 20px;
+}
+
+/* Contenedores principales */
+.container_mapa {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_contex {
+  width: 100%;
+  margin: 12px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 65px;
+  margin-top: 29px;
+  align-items: center;
+
+  .container__img {
+    max-width: 150px;
+
+    & img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  & h1 {
+    color: #6e6e6e;
+    padding-top: 23px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+/* Mapas */
+.map {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+
+  &.path_active {
+    justify-content: space-between;
+  }
+}
+
+.map__svg {
+  width: 750px;
+  position: relative;
+  transition: width 0.5s ease, margin-left 0.5s ease;
+
+  & path {
+    transition: fill 0.3s;
+    stroke-width: 0px;
+    cursor: pointer;
+
+    &:hover,
+    a.active & {
+      fill: #4c37c2;
+      stroke: #ffffff;
+      stroke-width: 1px;
+    }
+
+    &.active_path {
+      fill: #8176b7;
+      stroke: #ffffff;
+      stroke-width: 1px;
+    }
+  }
+
+  &.path_active {
+    width: 150px;
+    position: relative;
+    margin-left: 20px;
+  }
+}
+
+.map__list {
+  margin-top: 1rem;
+  width: 100%;
+  max-height: 500px;
+  overflow-y: scroll;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  & li {
+    list-style: none;
+  }
+}
+
+.map__list a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 8px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover,
+  &.active {
+    background-color: #e0e0e0;
+    color: #1a1a1a;
+    font-weight: 500;
+  }
+}
+
+/* Contenedor de SVG seleccionado */
+.selected-svg-container {
+  background: aliceblue;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: none;
+  gap: 20px;
+  padding: 10px;
+
+  & svg {
+    width: 45%;
+  }
+
+  & path {
+    fill: #8176b7;
+    stroke: #ffffff;
+    stroke-width: 1px;
+  }
+
+  &.path_active {
+    display: flex;
+  }
+}
+
+/* Estilos generales de la tabla */
+.selected-svg-container table {
+  width: 70%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+  background-color: #e1dfdf;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  & caption {
+    padding-bottom: 8px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  & thead th {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+  }
+
+  & tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+  }
+
+  & tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  & td,
+  & th {
+    text-align: left;
+  }
+
+  .total {
+    color: #000000;
+  }
+}
+
+/* Botones */
+button {
+  width: 60px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #9cc1dd;
+  border: none;
+  border-radius: 8px;
+  display: none;
+
+  & svg {
+    width: 20px;
+  }
+
+  &.path_active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* Estilos de transición */
+.selected-svg-container svg path {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.selected-svg-container svg .show,
+.selected-svg-container table.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.no-data {
+  text-align: center;
+  font-size: 22px;
+}
+.highlight path {
+  fill: #4c37c2;
+  stroke: #ffffff;
+  stroke-width: 1px;
+}
+
+/* ------------ */
+.duju,
+.puntilla,
+.itata {
+  width: 355px;
+  height: 255px;
+  position: absolute;
+  z-index: -10;
+}
+
+.duju {
+  top: 340px;
+  left: 340px;
+}
+
+.puntilla {
+  top: -114px;
+  right: 74px;
+}
+
+.itata {
+  left: -249px;
+  bottom: 165px;
+}
+
+.total-general {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  color: #38ae6d;
+  margin-right: 40px;
+  justify-content: space-between;
+
+  & svg {
+    width: 29px;
+    fill: #38ae6d;
+  }
+
+  & p {
+    font-weight: bold;
+  }
+
+  & table {
+    color: #ff0000;
+    font-size: 16px;
+    width: 165px;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.total-svg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.beneficiarios {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ----- DISEÑO MÓVILES ------------- */
+
+@media (width < 900px) {
+  .title {
+    flex-wrap: wrap;
+    margin: 0 32px;
+    margin-top: 20px;
+
+    .container__img {
+      max-width: 100px;
+    }
+
+    & h1 {
+      font-size: 20px;
+      order: 3;
+      width: 100%;
+      padding-top: 13px;
+    }
+
+    .container__img:nth-of-type(2) {
+      order: 2;
+    }
+  }
+
+  .selected-svg-container table {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* SOLO DE PRUEBAS EN PROCESO DISEÑO DE MÓVILES  */
+.mensaje-error {
+  display: none;
+}
+
+@media (width < 1200px) {
+  .container {
+    display: none;
+  }
+
+  .mensaje-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 13px;
+
+    .container_img_error {
+      width: 10em;
+      margin: 2em;
+
+      & img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    & h2 {
+      margin: 1em;
+    }
+
+    & p {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.progress-bar {
+  transition: width 0.25s;
+}
+.menu {
+  opacity: 0;
+  display: none;
+  animation: fade-in 0.5s forwards;
+}
+.menu.show {
+  display: block;
+}
+
+.conten_aside {
+  width: 100%;
+  max-width: 20%;
+}

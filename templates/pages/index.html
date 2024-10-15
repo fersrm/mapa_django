@@ -1,0 +1,19 @@
+{% extends 'components/Layout/base.html' %}
+{% load static %}   
+
+{% block head_title %}
+  Mapa Regional
+{% endblock head_title %}
+
+{% block content %}
+
+  {% include 'pages/home/secciones/mapa.html' %}
+  {% include 'components/mensajes.html' %}  
+  
+{% endblock content %}
+
+{% block javascript %}
+  <script defer src="{% static 'js/carga_documento.js' %}"></script>
+  <script defer src="{% static 'js/script.js' %}"></script>
+  <script defer src="{% static 'js/tabla.js' %}"></script>
+{% endblock javascript %}
